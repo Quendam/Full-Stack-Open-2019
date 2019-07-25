@@ -1,0 +1,29 @@
+title
+note over selain:
+Käyttäjä painaa Save painiketta.
+end note
+selain->palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note\ndata: note: Note
+note over palvelin: Tietojen tallennus
+palvelin-->selain: 302 Found
+
+note right of selain
+ Tiedostot ladataan selaimen välimuistista, jos palvelin ilmoittaa ettei ne ole muuttuneet
+end note
+
+selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/notes
+palvelin-->selain: 304 Not modified
+selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+palvelin-->selain: 304 Not modified
+selain->palvelin: https://fullstack-exampleapp.herokuapp.com/main.js
+palvelin-->selain: 304 Not modified
+
+note over selain: 
+Selain hakee uudelleen data.json, 
+jotta listaus voidaan päivittää
+end note
+selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+palvelin-->selain: 200 OK
+note over selain:
+Selain näyttää 
+päivitetyn listauksen
+end note

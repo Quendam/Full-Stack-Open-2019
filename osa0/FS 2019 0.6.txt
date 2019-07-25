@@ -1,0 +1,11 @@
+note over selain:
+Käyttäjä painaa Save painiketta.
+end note
+
+selain->palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note_spa\ndata: note: Note
+note over palvelin: Tietojen tallennus
+palvelin-->selain: {"message":"note created"}
+
+note over selain:
+Selain päivittää listauksen
+end note
