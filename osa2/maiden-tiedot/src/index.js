@@ -72,7 +72,7 @@ const App = () => {
   const [ countries, setCountries ] = useState([])
   const [ searchword, setSearchword ] = useState('')
   const [ weather, setWeather ] = useState([])
-  const apiKey = "87c30542342df86b3efa0baaf133ef5a";
+  const apiKey = "";
 
   const handleSearchwordChange = (event) => setSearchword(event.target.value)
   
