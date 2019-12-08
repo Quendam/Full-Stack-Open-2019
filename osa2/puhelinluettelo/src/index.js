@@ -59,6 +59,7 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ filter, setFilter ] = useState('')
   const [ infoMessage, setInfoMessage ] = useState(null)
+  const [ errorMessage, setErrorMessage ] = useState(null)
 
   const handleNameChange = (event) => setNewName(event.target.value)
   const handleNumberChange = (event) => setNewNumber(event.target.value)
@@ -113,6 +114,19 @@ const App = () => {
           setInfoMessage(null)
         }, 5000)
       })
+      .catch(() =>{
+        const person = persons.reduce((prev, current) => 
+          current.id === id ? {name: current.name} : prev,
+          {name: "-"}
+        )
+        
+        setErrorMessage(`Information of ${person.name} has already been removed from server`)
+        setTimeout(() => { 
+          setErrorMessage(null)
+        }, 5000)
+        
+        getPersons()
+      })
   }
  
   const deletePerson = (id) => {
@@ -129,6 +143,14 @@ const App = () => {
           setInfoMessage(`Deleted ${person.name}`)
           setTimeout(() => { 
             setInfoMessage(null)
+          }, 5000)
+        })
+        .catch(() =>{
+          getPersons()
+
+          setErrorMessage(`Information of ${person.name} has already been removed from server`)
+          setTimeout(() => { 
+            setErrorMessage(null)
           }, 5000)
         })
     }
@@ -152,6 +174,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification type='info' message={infoMessage} />
+      <Notification type='error' message={errorMessage} />
       <Filter 
         filter={filter}
         handleFilterChange={handleFilterChange}
