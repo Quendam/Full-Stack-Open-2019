@@ -4,6 +4,7 @@ import { setNotification, clearNotification } from '../reducers/notificationRedu
 
 const AnecdoteList = (props) => {
   const anecdotes = props.store.getState().anecdotes
+  const filter = props.store.getState().filter.term
 
   const vote = (id) => {
     props.store.dispatch(addVote(id))
@@ -18,7 +19,8 @@ const AnecdoteList = (props) => {
 
   return (
     <div>
-        {anecdotes.sort((a,b) => {
+        {anecdotes.filter(a => filter === '' || a.content.indexOf(filter) !== -1)
+        .sort((a,b) => {
           return a.votes === b.votes
             ? 0 
             : a.votes > b.votes ? -1 : 1
