@@ -2,16 +2,16 @@ const initialState = {
   message: null
 }
 
-export const setNotification = (message) => {
-  return {
-    type: 'SET_NOTIFICATION',
-    message: message
-  }
-}
+export const setNotification = (message, timeout) => {
+  return async dispatch => {
+    dispatch({
+      type: 'SET_NOTIFICATION',
+      message: message
+    })
 
-export const clearNotification = () => {
-  return {
-    type: 'CLEAR_NOTIFICATION'
+    setTimeout(() => dispatch({
+      type: 'CLEAR_NOTIFICATION'
+    }), timeout * 1000)
   }
 }
 
@@ -25,6 +25,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         message: action.message
       }
+  
     case 'CLEAR_NOTIFICATION':
       return {
         ...state,
@@ -32,6 +33,7 @@ const reducer = (state = initialState, action) => {
       }
     default:
   }
+  
   return state
 }
 
