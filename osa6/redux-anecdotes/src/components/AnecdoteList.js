@@ -5,11 +5,11 @@ import { setNotification, clearNotification } from '../reducers/notificationRedu
 
 const AnecdoteList = (props) => {
 
-  const vote = (id) => {
-    props.addVote(id)
+  const vote = (data) => {
+    props.addVote(data)
 
     const anecdote = props.visibleAnecdotes.reduce((prev, current) => 
-      current.id === id ? current : prev, {content: 'unknown'})
+      current.id === data.id ? current : prev, {content: 'unknown'})
 
     props.setNotification(`You voted for '${anecdote.content}'`)
     setTimeout(() => props.clearNotification()
@@ -29,7 +29,7 @@ const AnecdoteList = (props) => {
             </div>
             <div>
               has {anecdote.votes}
-              <button onClick={() => vote(anecdote.id)}>vote</button>
+              <button onClick={() => vote(anecdote)}>vote</button>
             </div>
           </div>
         )}
