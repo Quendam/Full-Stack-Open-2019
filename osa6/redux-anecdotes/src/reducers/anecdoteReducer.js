@@ -33,8 +33,17 @@ const reducer = (state = initialState, action) => {
           : anecdote
       })
 
+    case 'ADD_ANECDOTE':
+      const newAnecdote = asObject(action.data.anecdote)
+
+      return [
+        ...state,
+        newAnecdote
+      ]
+
       default:
   }
+
   return state
 }
 
