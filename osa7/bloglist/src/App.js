@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Route,// Link, Redirect, withRouter
+} from 'react-router-dom'
 import LoginForm from './components/LoginForm'
 import Blog from './components/Blog'
+import Users from './components/Users'
 import loginService from './services/login'
 import blogService from './services/blogs'
 import UserInfo from './components/UserInfo'
@@ -150,14 +155,21 @@ console.log("user", props.user);
         user={props.user}
         onLogout={handleLogout}
       />
-      <Togglable
-        buttonLabel='new blog'
-      >
-        <BlogForm
-          onCreate={handleAddBlog}
-        />
-      </Togglable>
-      {blogList}
+      <Router>
+        <Route exact path="/" render={() =>
+          <div>
+            <Togglable
+              buttonLabel='new blog'
+            >
+              <BlogForm
+                onCreate={handleAddBlog}
+              />
+            </Togglable>
+            {blogList}
+          </div>
+        } />
+        <Route path="/users" render={() => <Users />} />
+      </Router>
     </div>
   )
 }
