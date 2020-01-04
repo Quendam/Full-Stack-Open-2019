@@ -21,7 +21,16 @@ const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
-      {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
+      {
+        anecdotes.map(anecdote => (
+            <li key={anecdote.id} >
+              <Link to={`/${anecdote.id}`}>
+                {anecdote.content}
+              </Link>
+            </li>
+          )
+        )
+      }
     </ul>
   </div>
 )
@@ -87,6 +96,23 @@ const CreateNew = (props) => {
 
 }
 
+const ShowAnecdote = ({anecdotes, selected}) => {
+  const anecdote = anecdotes.reduce( (prev, cur) => cur.id == selected ? cur : prev,  {} )
+  console.log("in Show", anecdotes)
+  console.log("in Show", selected)
+  console.log("in Show", anecdote)
+  return (
+    <div>
+      <h2>{anecdote.content}</h2>
+      <p>{`has ${anecdote.votes} votes`}</p>
+      <p>
+        for more info see <a href={anecdote.info}>{anecdote.info}</a>
+      </p>
+
+    </div>
+  )
+}
+
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
     {
@@ -131,9 +157,10 @@ const App = () => {
       <Router>
         <h1>Software anecdotes</h1>
         <Menu />
-        <Route exat path='/' render={() => <AnecdoteList anecdotes={anecdotes} /> } />
+        <Route exact path='/' render={() => <AnecdoteList anecdotes={anecdotes} /> } />
         <Route path='/create' render={() => <CreateNew addNew={addNew} /> } />
         <Route path='/about' render={() => <About /> } />
+        <Route path='/:id' render={({ match }) => <ShowAnecdote anecdotes={anecdotes} selected={match.params.id} /> } />
         <Footer />
       </Router>
     </div>
