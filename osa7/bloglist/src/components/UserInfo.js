@@ -1,10 +1,10 @@
 import React from 'react'
 
 const UserInfo = ({ user, onLogout }) => (
-  <p>
+  <span>
     {`${user.name} logged in` }
     <button onClick={onLogout}>logout</button>
-  </p>
+  </span>
 )
 
 export default UserInfo

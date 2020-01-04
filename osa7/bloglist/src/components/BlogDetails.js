@@ -18,6 +18,7 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete }) => {
       onDelete(blog)
     }
   }
+  const commentsList = blog.comments.map(comment => <li>{comment}</li>)
 
   return (
     <div className='blog-details'>
@@ -33,6 +34,13 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete }) => {
       {ownBlog &&
         <button onClick={handleRemove}>remove</button>
       }
+
+      <h3>
+        comments 
+      </h3>
+      <ul>
+        {commentsList}
+      </ul>
     </div>
   )
 }

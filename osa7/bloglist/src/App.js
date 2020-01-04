@@ -9,7 +9,7 @@ import Blog from './components/Blog'
 import Users from './components/Users'
 import loginService from './services/login'
 import blogService from './services/blogs'
-import UserInfo from './components/UserInfo'
+import Menu from './components/Menu'
 import UserDetails from './components/UserDetails'
 import BlogForm from './components/BlogForm'
 import BlogDetails from './components/BlogDetails'
@@ -150,14 +150,15 @@ console.log("user", props.user);
 
   return (
     <div>
-      <h1>Blogs</h1>
-      <Notification />
-
-      <UserInfo
-        user={props.user}
-        onLogout={handleLogout}
-      />
       <Router>
+        <Menu 
+          user={props.user}
+          onLogout={handleLogout}
+        />
+
+        <h1>Blogs</h1>
+        <Notification />
+
         <Route exact path="/" render={() =>
           <div>
             <Togglable

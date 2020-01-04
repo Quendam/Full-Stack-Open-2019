@@ -24,3 +24,15 @@
 .blog-entry .title{
   cursor: pointer;
 }
+
+.menu {
+  background-color: #ddd;
+  padding: 5px;
+}
+
+.menu a{
+  padding: 0 3px;
+}
+.menu span, .menu button{
+  margin: 0 5px;
+}
