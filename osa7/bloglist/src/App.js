@@ -10,6 +10,7 @@ import Users from './components/Users'
 import loginService from './services/login'
 import blogService from './services/blogs'
 import UserInfo from './components/UserInfo'
+import UserDetails from './components/UserDetails'
 import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
@@ -168,7 +169,8 @@ console.log("user", props.user);
             {blogList}
           </div>
         } />
-        <Route path="/users" render={() => <Users />} />
+        <Route exact path="/users" render={() => <Users />} />
+        <Route path="/users/:id" render={({match}) => <UserDetails selected={match.params.id} />} />
       </Router>
     </div>
   )
