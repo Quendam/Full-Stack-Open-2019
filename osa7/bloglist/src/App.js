@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import LoginForm from './components/LoginForm'
 import Blog from './components/Blog'
@@ -10,11 +10,11 @@ import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import { setNotification } from './reducers/notificationReducer'
 import { setUser } from './reducers/loginReducer'
+import { setBlogs } from './reducers/blogReducer'
 
 import './App.css'
 
 const App = (props) => {
-  const [blogs, setBlogs] = useState([])
 
   const handleLogin = async (username, password) => {
     try{
@@ -54,7 +54,7 @@ const App = (props) => {
 
     if(response.status === 201){
       const receivedBlogs = await blogService.getAll()
-      setBlogs(receivedBlogs)
+      props.setBlogs(receivedBlogs)
 
       props.setNotification(`a new blog ${blog.title} by ${blog.author} added`, 'info', 5)
     }else {
@@ -71,7 +71,7 @@ const App = (props) => {
       const response = await blogService.update(blog)
       if(response.status === 200){
         const receivedBlogs = await blogService.getAll()
-        setBlogs(receivedBlogs)
+        props.setBlogs(receivedBlogs)
 
         props.setNotification(`like addd to blog ${blog.title}`, 'info', 5)
       }else {
@@ -89,7 +89,7 @@ const App = (props) => {
 
       if(response.status === 204){
         const receivedBlogs = await blogService.getAll()
-        setBlogs(receivedBlogs)
+        props.setBlogs(receivedBlogs)
 
         props.setNotification(`blog ${blog.title} removed`, 'info', 5)
       }else {
@@ -103,7 +103,8 @@ const App = (props) => {
   useEffect(() => {
     blogService
       .getAll()
-      .then(receivedBlogs => setBlogs(receivedBlogs))
+      .then(receivedBlogs => props.setBlogs(receivedBlogs))
+  // eslint-disable-next-line 
   }, [])
 
   useEffect(() => {
@@ -129,7 +130,7 @@ const App = (props) => {
     )
   }
 
-  const blogList = blogs.map(entry =>
+  const blogList = props.blogs.map(entry =>
     <Blog
       key={entry.id}
       blog={entry}
@@ -162,12 +163,13 @@ console.log("user", props.user);
 }
 
 const mapDispatchToProps = {
-  setNotification, setUser
+  setNotification, setUser, setBlogs
 }
 
 const mapStateToProps = (state) => {
   return {
     user: state.login.user,
+    blogs: state.blog.blogs
   }
 }
 
