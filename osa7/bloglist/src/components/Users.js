@@ -1,23 +1,21 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import { connect } from 'react-redux'
+import userService from '../services/users'
+import { setUsers } from '../reducers/userReducer'
 
-const Users = ({ blogs }) => {
-  const users = {};
-  blogs.forEach(blog => {
-    if(!users[blog.user.username]){
-      users[blog.user.username] = {
-        ...blog.user,
-        blogs: 1
-      }
-    } else {
-      users[blog.user.username].blogs++
-    }
-  });
-    
-  const userList = Object.values(users).map(user => (
+const Users = ({ users, setUsers }) => {
+
+  useEffect(() => {
+    userService
+      .getAll()
+      .then(receivedUsers => setUsers(receivedUsers))
+  // eslint-disable-next-line 
+  }, [])
+
+  const userList = users.map(user => (
     <tr key={user.id}>
       <td>{user.name}</td>
-      <td>{user.blogs}</td>
+      <td>{user.blogs.length}</td>
     </tr>
   ))
 
@@ -35,13 +33,18 @@ const Users = ({ blogs }) => {
     </div>
   )
 }
+
+const mapDispatchToProps = {
+  setUsers
+}
+
 const mapStateToProps = (state) => {
   return {
-    blogs: state.blog.blogs,
+    users: state.user.users,
   }
 }
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Users)

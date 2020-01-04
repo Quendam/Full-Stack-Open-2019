@@ -14,7 +14,7 @@ import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import { setNotification } from './reducers/notificationReducer'
-import { setUser } from './reducers/loginReducer'
+import { setUser } from './reducers/userReducer'
 import { setBlogs } from './reducers/blogReducer'
 
 import './App.css'
@@ -180,7 +180,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.login.user,
+    user: state.user.user,
     blogs: state.blog.blogs
   }
 }
