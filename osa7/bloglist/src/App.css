@@ -1,0 +1,26 @@
+.info {
+  margin: 10px;
+  background: #ddd;
+  border: 2px solid green;
+  border-radius: 5px;
+  color: green;
+  padding: 10px 15px;
+}
+
+.error {
+  margin: 10px;
+  background: #ddd;
+  border: 2px solid red;
+  border-radius: 5px;
+  color: red;
+  padding: 10px 15px;
+}
+
+.blog-entry{
+  border: 1px solid blacK;
+  margin: 2px;
+  padding: 5px;
+}
+.blog-entry .title{
+  cursor: pointer;
+}
