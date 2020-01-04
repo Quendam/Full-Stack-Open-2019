@@ -9,11 +9,11 @@ import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import { setNotification } from './reducers/notificationReducer'
+import { setUser } from './reducers/loginReducer'
 
 import './App.css'
 
 const App = (props) => {
-  const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
 
   const handleLogin = async (username, password) => {
@@ -29,23 +29,23 @@ const App = (props) => {
         )
 
         blogService.setToken(user.token)
-        setUser(user)
+        props.setUser(user)
 
         props.setNotification(`${user.name} has logged in`, 'info', 5)
       }else{
-        setUser(null)
+        props.setUser(null)
 
         props.setNotification('wrong username or password', 'error', 5)
       }
     } catch(execption) {
-      setUser(null)
+      props.setUser(null)
 
       props.setNotification('Error while processing login', 'error', 5)
     }
   }
 
   const handleLogout = () => {
-    setUser(null)
+    props.setUser(null)
     window.localStorage.removeItem('loggedBlogappUser')
   }
 
@@ -110,13 +110,14 @@ const App = (props) => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setUser(user)
+      props.setUser(user)
       blogService.setToken(user.token)
     }
+  // eslint-disable-next-line 
   }, [])
 
 
-  if(!user){
+  if(!props.user){
     return (
       <div>
         <h2>Login to application</h2>
@@ -134,9 +135,10 @@ const App = (props) => {
       blog={entry}
       onLike={handleAddLike}
       onDelete={handleDeleteBlog}
-      user={user}
+      user={props.user}
     />
   )
+console.log("user", props.user);
 
   return (
     <div>
@@ -144,7 +146,7 @@ const App = (props) => {
       <Notification />
 
       <UserInfo
-        user={user}
+        user={props.user}
         onLogout={handleLogout}
       />
       <Togglable
@@ -160,10 +162,16 @@ const App = (props) => {
 }
 
 const mapDispatchToProps = {
-  setNotification
+  setNotification, setUser
+}
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.login.user,
+  }
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App)
