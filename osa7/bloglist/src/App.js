@@ -12,6 +12,7 @@ import blogService from './services/blogs'
 import UserInfo from './components/UserInfo'
 import UserDetails from './components/UserDetails'
 import BlogForm from './components/BlogForm'
+import BlogDetails from './components/BlogDetails'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import { setNotification } from './reducers/notificationReducer'
@@ -171,6 +172,13 @@ console.log("user", props.user);
         } />
         <Route exact path="/users" render={() => <Users />} />
         <Route path="/users/:id" render={({match}) => <UserDetails selected={match.params.id} />} />
+        <Route path="/blogs/:id" render={({match}) => (
+          <BlogDetails 
+            selected={match.params.id}
+            onLike={handleAddLike}
+            onDelete={handleDeleteBlog}
+          />)
+          }/>
       </Router>
     </div>
   )
