@@ -22,18 +22,18 @@ const reducer = (state = initialState, action) => {
   console.log('action', action)
 
   switch(action.type){
-    case 'SET_NOTIFICATION':
-      return {
-        ...state,
-        message: action.message,
-        isError: action.isError
-      }
-  
-    case 'CLEAR_NOTIFICATION':
-      return initialState
-    default:
+  case 'SET_NOTIFICATION':
+    return {
+      ...state,
+      message: action.message,
+      isError: action.isError
+    }
+
+  case 'CLEAR_NOTIFICATION':
+    return initialState
+  default:
   }
-  
+
   return state
 }
 

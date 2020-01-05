@@ -1,9 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 
 const UserDetails = ({ users, selected }) => {
-  
-  const selectedUser = users.reduce((prev, curr) => 
+
+  const selectedUser = users.reduce((prev, curr) =>
     curr.id === selected  ? curr : prev ,{ blogs:[] }
   )
   const blogList = selectedUser.blogs.map(blog => (

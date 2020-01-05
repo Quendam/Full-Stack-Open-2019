@@ -1,5 +1,5 @@
-import React , {useEffect} from 'react'
-import { connect } from 'react-redux'
+import React , { useEffect } from 'react'
+import { connect } from 'react-redux'
 import userService from '../services/users'
 import { setUsers } from '../reducers/userReducer'
 import { Link } from 'react-router-dom'
@@ -10,7 +10,7 @@ const Users = ({ users, setUsers }) => {
     userService
       .getAll()
       .then(receivedUsers => setUsers(receivedUsers))
-  // eslint-disable-next-line 
+  // eslint-disable-next-line
   }, [])
 
   const userList = users.map(user => (

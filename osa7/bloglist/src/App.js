@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Route,// Link, Redirect, withRouter
@@ -129,7 +129,7 @@ const App = (props) => {
     blogService
       .getAll()
       .then(receivedBlogs => props.setBlogs(receivedBlogs))
-  // eslint-disable-next-line 
+  // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -139,7 +139,7 @@ const App = (props) => {
       props.setUser(user)
       blogService.setToken(user.token)
     }
-  // eslint-disable-next-line 
+  // eslint-disable-next-line
   }, [])
 
 
@@ -169,7 +169,7 @@ const App = (props) => {
   return (
     <Container>
       <Router>
-        <Menu 
+        <Menu
           user={props.user}
           onLogout={handleLogout}
         />
@@ -189,26 +189,26 @@ const App = (props) => {
                         onCreate={handleAddBlog}
                       />
                     </Card.Body>
-                  </Card>                
+                  </Card>
                 </Col>
               </Row>
             </Togglable>
-            
+
             <Row className='blog-card-list'>
               {blogList}
             </Row>
           </div>
         } />
         <Route exact path="/users" render={() => <Users />} />
-        <Route path="/users/:id" render={({match}) => <UserDetails selected={match.params.id} />} />
-        <Route path="/blogs/:id" render={({match}) => (
-          <BlogDetails 
+        <Route path="/users/:id" render={({ match }) => <UserDetails selected={match.params.id} />} />
+        <Route path="/blogs/:id" render={({ match }) => (
+          <BlogDetails
             selected={match.params.id}
             onLike={handleAddLike}
             onDelete={handleDeleteBlog}
             onAddComment={handleAddComment}
           />)
-          }
+        }
         />
       </Router>
     </Container>

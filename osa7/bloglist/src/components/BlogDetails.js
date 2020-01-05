@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { Button, Card } from 'react-bootstrap'
 
 const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment }) => {
-  const [newComment, setNewComment] = useState("")
+  const [newComment, setNewComment] = useState('')
 
-  const blog = blogs.reduce((prev, curr) => 
+  const blog = blogs.reduce((prev, curr) =>
     curr.id === selected  ? curr : prev , {
-      user: { username: '' },
-      comments: []
-    }
+    user: { username: '' },
+    comments: []
+  }
   )
 
   const ownBlog = user.username === blog.user.username
@@ -33,45 +33,45 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment }) 
   return (
     <div className='blog-details'>
 
-        <Card>
-          <Card.Header>
-            {blog.title} {blog.author}
-          </Card.Header>
-          <Card.Body>
-            <p>
-              <a href={blog.url}>{blog.url}</a>
-            </p>
+      <Card>
+        <Card.Header>
+          {blog.title} {blog.author}
+        </Card.Header>
+        <Card.Body>
+          <p>
+            <a href={blog.url}>{blog.url}</a>
+          </p>
 
-            <p>
-              {blog.likes} likes
-              <Button onClick={handleLikePress} variant='success'>
+          <p>
+            {blog.likes} likes
+            <Button onClick={handleLikePress} variant='success'>
                 Like
-              </Button>
-            </p>
-              
-            <h3>
-              comments 
-            </h3>
-            <p>
-              <input type='text' value={newComment} onChange={({target}) => setNewComment(target.value)} />
-              <Button onClick={handleAddComment}>
+            </Button>
+          </p>
+
+          <h3>
+              comments
+          </h3>
+          <p>
+            <input type='text' value={newComment} onChange={({ target }) => setNewComment(target.value)} />
+            <Button onClick={handleAddComment}>
                 add comment
-              </Button>
-            </p>
-            <ul>
-              {commentsList}
-            </ul>
-          </Card.Body>
-          <Card.Footer>
+            </Button>
+          </p>
+          <ul>
+            {commentsList}
+          </ul>
+        </Card.Body>
+        <Card.Footer>
             added by {blog.user.name}
-            
-            {ownBlog &&
+
+          {ownBlog &&
               <Button onClick={handleRemove} variant='danger'>
                 remove
               </Button>
-            }
-          </Card.Footer>
-        </Card> 
+          }
+        </Card.Footer>
+      </Card>
     </div>
   )
 }

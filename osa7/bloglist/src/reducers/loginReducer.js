@@ -14,17 +14,17 @@ const reducer = (state = initialState, action) => {
   console.log('action', action)
 
   switch(action.type){
-    case 'SET_USER':
-      return {
-        ...state,
-        user: action.user,
-      }
-  
-    case 'CLEAR_USER':
-      return initialState
-    default:
+  case 'SET_USER':
+    return {
+      ...state,
+      user: action.user,
+    }
+
+  case 'CLEAR_USER':
+    return initialState
+  default:
   }
-  
+
   return state
 }
 

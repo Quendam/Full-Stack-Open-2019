@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Alert } from 'react-bootstrap'
 
 const Notification = ({ message, isError }) => {
-  
+
   if(message === null){
     return null
   }
