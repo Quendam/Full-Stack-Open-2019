@@ -38,7 +38,7 @@ const BlogForm = ({ onCreate }) => {
 
       <Form.Group controlId="formUrl">
         <Form.Label>Url</Form.Label>
-        <Form.Control {...title} type="text" placeholder="Enter url"  />
+        <Form.Control {...url} type="text" placeholder="Enter url"  />
       </Form.Group>
 
       <ButtonToolbar className='form-buttons'>

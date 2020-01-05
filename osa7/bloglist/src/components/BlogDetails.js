@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, Card } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 
-const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment }) => {
+const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment, history }) => {
   const [newComment, setNewComment] = useState('')
 
   const blog = blogs.reduce((prev, curr) =>
@@ -21,6 +22,7 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment }) 
   const handleRemove = () => {
     if(window.confirm(`remove blog ${blog.title} by ${blog.author}`)){
       onDelete(blog)
+      history.push('/')
     }
   }
   const commentsList = blog.comments.map((comment, idx) => <li key={idx}>{comment}</li>)
@@ -87,4 +89,4 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   null
-)(BlogDetails)
+)(withRouter(BlogDetails))
