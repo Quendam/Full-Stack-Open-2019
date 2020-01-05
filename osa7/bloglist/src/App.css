@@ -36,3 +36,23 @@
 .menu span, .menu button{
   margin: 0 5px;
 }
+
+.blog-card-list {
+  margin-top: 15px;
+}
+.blog-card-list .card{
+  margin-bottom: 15px;
+  min-height: 135px;
+}
+
+.navbar button {
+  margin-left: 15px;
+}
+
+.blog-details .card{
+  margin-top: 15px;
+}
+
+.blog-details button {
+  margin-left: .5em;
+}

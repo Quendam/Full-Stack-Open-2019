@@ -1,16 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Card } from 'react-bootstrap'
 
-const Blog = ({ blog, onLike, onDelete, user }) => {
+const Blog = ({ blog }) => {
 
   return (
-    <div className='blog-entry'>
-      <div className='title'>
-        <Link to={`/blogs/${blog.id}`}>
-          {blog.title} {blog.author}
-        </Link>
-      </div>
-    </div>
+    <Card >
+      <Card.Body>
+        <Card.Title>{blog.title}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">{blog.author}</Card.Subtitle>
+        <Card.Link href={`/blogs/${blog.id}`}>Read more</Card.Link>
+      </Card.Body>
+    </Card>
   )
 }
 

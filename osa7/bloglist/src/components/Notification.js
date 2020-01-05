@@ -1,17 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Alert } from 'react-bootstrap'
 
 const Notification = ({ message, isError }) => {
-  console.log("Notification ", message, isError);
   
   if(message === null){
     return null
   }
 
   return(
-    <div className={isError ? 'error' : 'info'}>
+    <Alert variant={isError ? 'warning' : 'success'}>
       {message}
-    </div>
+    </Alert>
   )
 }
 

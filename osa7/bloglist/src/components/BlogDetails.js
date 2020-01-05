@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { Button, Card } from 'react-bootstrap'
 
 const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment }) => {
   const [newComment, setNewComment] = useState("")
@@ -31,29 +32,46 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment }) 
 
   return (
     <div className='blog-details'>
-      <h2> {blog.title} {blog.author}</h2>
-      <p>
-        <a href={blog.url}>{blog.url}</a>
-      </p>
-      
-      {blog.likes} likes <button onClick={handleLikePress}>like</button><br/>
-      
-      added by {blog.user.name}<br/>
-      
-      {ownBlog &&
-        <button onClick={handleRemove}>remove</button>
-      }
 
-      <h3>
-        comments 
-      </h3>
-      <p>
-        <input type='text' value={newComment} onChange={({target}) => setNewComment(target.value)} />
-        <button onClick={handleAddComment}>add comment</button>
-      </p>
-      <ul>
-        {commentsList}
-      </ul>
+        <Card>
+          <Card.Header>
+            {blog.title} {blog.author}
+          </Card.Header>
+          <Card.Body>
+            <p>
+              <a href={blog.url}>{blog.url}</a>
+            </p>
+
+            <p>
+              {blog.likes} likes
+              <Button onClick={handleLikePress} variant='success'>
+                Like
+              </Button>
+            </p>
+              
+            <h3>
+              comments 
+            </h3>
+            <p>
+              <input type='text' value={newComment} onChange={({target}) => setNewComment(target.value)} />
+              <Button onClick={handleAddComment}>
+                add comment
+              </Button>
+            </p>
+            <ul>
+              {commentsList}
+            </ul>
+          </Card.Body>
+          <Card.Footer>
+            added by {blog.user.name}
+            
+            {ownBlog &&
+              <Button onClick={handleRemove} variant='danger'>
+                remove
+              </Button>
+            }
+          </Card.Footer>
+        </Card> 
     </div>
   )
 }

@@ -18,6 +18,7 @@ import Togglable from './components/Togglable'
 import { setNotification } from './reducers/notificationReducer'
 import { setUser } from './reducers/userReducer'
 import { setBlogs } from './reducers/blogReducer'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 
 import './App.css'
 
@@ -144,36 +145,35 @@ const App = (props) => {
 
   if(!props.user){
     return (
-      <div>
+      <Container>
         <h2>Login to application</h2>
         <Notification />
         <LoginForm
           onLogin={handleLogin}
         />
-      </div>
+      </Container>
     )
   }
 
   const blogList = props.blogs.map(entry =>
-    <Blog
-      key={entry.id}
-      blog={entry}
-      onLike={handleAddLike}
-      onDelete={handleDeleteBlog}
-      user={props.user}
-    />
+    <Col key={entry.id} lg={4} >
+      <Blog
+        blog={entry}
+        onLike={handleAddLike}
+        onDelete={handleDeleteBlog}
+        user={props.user}
+      />
+    </Col>
   )
-console.log("user", props.user);
 
   return (
-    <div>
+    <Container>
       <Router>
         <Menu 
           user={props.user}
           onLogout={handleLogout}
         />
 
-        <h1>Blogs</h1>
         <Notification />
 
         <Route exact path="/" render={() =>
@@ -181,11 +181,22 @@ console.log("user", props.user);
             <Togglable
               buttonLabel='new blog'
             >
-              <BlogForm
-                onCreate={handleAddBlog}
-              />
+              <Row>
+                <Col lg={6}>
+                  <Card>
+                    <Card.Body>
+                      <BlogForm
+                        onCreate={handleAddBlog}
+                      />
+                    </Card.Body>
+                  </Card>                
+                </Col>
+              </Row>
             </Togglable>
-            {blogList}
+            
+            <Row className='blog-card-list'>
+              {blogList}
+            </Row>
           </div>
         } />
         <Route exact path="/users" render={() => <Users />} />
@@ -197,9 +208,10 @@ console.log("user", props.user);
             onDelete={handleDeleteBlog}
             onAddComment={handleAddComment}
           />)
-          }/>
+          }
+        />
       </Router>
-    </div>
+    </Container>
   )
 }
 
