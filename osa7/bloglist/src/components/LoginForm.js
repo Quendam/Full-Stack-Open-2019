@@ -18,15 +18,25 @@ const LoginForm = ({ onLogin }) => {
     <Form onSubmit={handleLogin}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username</Form.Label>
-        <Form.Control {...username} type="text" placeholder="Enter username"  />
+        <Form.Control
+          {...username}
+          type="text"
+          placeholder="Enter username"
+          data-cy='username'
+        />
       </Form.Group>
 
       <Form.Group controlId="formPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control {...password} type="password" placeholder="Enter password" />
+        <Form.Control
+          {...password}
+          type="password"
+          placeholder="Enter password"
+          data-cy='password'
+        />
       </Form.Group>
 
-      <Button variant="primary" type='submit'>
+      <Button variant="primary" type='submit' data-cy='submit'>
         Login
       </Button>
     </Form>
