@@ -1,0 +1,58 @@
+.info {
+  margin: 10px;
+  background: #ddd;
+  border: 2px solid green;
+  border-radius: 5px;
+  color: green;
+  padding: 10px 15px;
+}
+
+.error {
+  margin: 10px;
+  background: #ddd;
+  border: 2px solid red;
+  border-radius: 5px;
+  color: red;
+  padding: 10px 15px;
+}
+
+.blog-entry{
+  border: 1px solid blacK;
+  margin: 2px;
+  padding: 5px;
+}
+.blog-entry .title{
+  cursor: pointer;
+}
+
+.menu {
+  background-color: #ddd;
+  padding: 5px;
+}
+
+.menu a{
+  padding: 0 3px;
+}
+.menu span, .menu button{
+  margin: 0 5px;
+}
+
+.blog-card-list {
+  margin-top: 15px;
+}
+.blog-card-list .card{
+  margin-bottom: 15px;
+  min-height: 135px;
+}
+
+.navbar button {
+  margin-left: 15px;
+}
+
+.blog-details .card{
+  margin-top: 15px;
+}
+
+.blog-details button {
+  margin-left: .5em;
+}
