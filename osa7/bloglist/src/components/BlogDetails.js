@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 const BlogDetails = ({ blogs, selected, user, onLike, onDelete }) => {
   
   const blog = blogs.reduce((prev, curr) => 
-    curr.id === selected  ? curr : prev , {user: { username: '' } }
+    curr.id === selected  ? curr : prev , {
+      user: { username: '' },
+      comments: []
+    }
   )
 
   const ownBlog = user.username === blog.user.username
