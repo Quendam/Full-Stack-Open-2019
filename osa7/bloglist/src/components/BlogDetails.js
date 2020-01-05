@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-const BlogDetails = ({ blogs, selected, user, onLike, onDelete }) => {
-  
+const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment }) => {
+  const [newComment, setNewComment] = useState("")
+
   const blog = blogs.reduce((prev, curr) => 
     curr.id === selected  ? curr : prev , {
       user: { username: '' },
@@ -21,7 +22,12 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete }) => {
       onDelete(blog)
     }
   }
-  const commentsList = blog.comments.map(comment => <li>{comment}</li>)
+  const commentsList = blog.comments.map((comment, idx) => <li key={idx}>{comment}</li>)
+
+  const handleAddComment = () => {
+    onAddComment(blog.id, newComment)
+    setNewComment('')
+  }
 
   return (
     <div className='blog-details'>
@@ -41,6 +47,10 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete }) => {
       <h3>
         comments 
       </h3>
+      <p>
+        <input type='text' value={newComment} onChange={({target}) => setNewComment(target.value)} />
+        <button onClick={handleAddComment}>add comment</button>
+      </p>
       <ul>
         {commentsList}
       </ul>

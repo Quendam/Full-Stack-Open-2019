@@ -89,6 +89,23 @@ const App = (props) => {
     }
   }
 
+  const handleAddComment = async (blogId, comment) => {
+
+    try{
+      const response = await blogService.addComment(blogId, comment)
+      if(response.status === 201){
+        const receivedBlogs = await blogService.getAll()
+        props.setBlogs(receivedBlogs)
+
+        props.setNotification('comment added', 'info', 5)
+      }else {
+        props.setNotification('Error while adding comment', 'error', 5)
+      }
+    }catch(execption){
+      console.log('error adding comment', execption.response)
+    }
+  }
+
   const handleDeleteBlog = async (blog) => {
 
     try{
@@ -178,6 +195,7 @@ console.log("user", props.user);
             selected={match.params.id}
             onLike={handleAddLike}
             onDelete={handleDeleteBlog}
+            onAddComment={handleAddComment}
           />)
           }/>
       </Router>
