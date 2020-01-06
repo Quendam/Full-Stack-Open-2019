@@ -55,8 +55,13 @@ const BlogDetails = ({ blogs, selected, user, onLike, onDelete, onAddComment, hi
               comments
           </h3>
           <p>
-            <input type='text' value={newComment} onChange={({ target }) => setNewComment(target.value)} />
-            <Button onClick={handleAddComment}>
+            <input
+              type='text'
+              value={newComment}
+              onChange={({ target }) => setNewComment(target.value)}
+              data-cy='blog-comment-entry'
+            />
+            <Button onClick={handleAddComment} data-cy='blog-comment-add'>
                 add comment
             </Button>
           </p>

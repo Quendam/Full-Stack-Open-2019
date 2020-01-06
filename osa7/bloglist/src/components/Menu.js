@@ -22,7 +22,9 @@ const Menu = ({ user, onLogout }) => (
         {`logged in ${user.name}` }
       </Navbar.Text>
       <Form inline>
-        <Button variant="outline-dark" onClick={onLogout}>Logout</Button>
+        <Button variant="outline-dark" onClick={onLogout} data-cy='logout-btn'>
+          Logout
+        </Button>
       </Form>
     </Navbar.Collapse>
   </Navbar>

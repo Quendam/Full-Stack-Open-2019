@@ -16,7 +16,9 @@ const Users = ({ users, setUsers }) => {
   const userList = users.map(user => (
     <tr key={user.id}>
       <td><Link to={`/users/${user.id}`}>{user.name}</Link></td>
-      <td>{user.blogs.length}</td>
+      <td data-cy='user-blog-count'>
+        {user.blogs.length}
+      </td>
     </tr>
   ))
 
