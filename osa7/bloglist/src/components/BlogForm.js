@@ -28,24 +28,39 @@ const BlogForm = ({ onCreate }) => {
     <Form onSubmit={handleAddBlog}>
       <Form.Group controlId="formTitle">
         <Form.Label>Title</Form.Label>
-        <Form.Control {...title} type="text" placeholder="Enter title"  />
+        <Form.Control
+          {...title}
+          type="text"
+          placeholder="Enter title"
+          data-cy='new-blog-title'
+        />
       </Form.Group>
 
       <Form.Group controlId="formAuthor">
         <Form.Label>Author</Form.Label>
-        <Form.Control {...author} type="text" placeholder="Enter author"  />
+        <Form.Control
+          {...author}
+          type="text"
+          placeholder="Enter author"
+          data-cy='new-blog-author'
+        />
       </Form.Group>
 
       <Form.Group controlId="formUrl">
         <Form.Label>Url</Form.Label>
-        <Form.Control {...url} type="text" placeholder="Enter url"  />
+        <Form.Control
+          {...url}
+          type="text"
+          placeholder="Enter url"
+          data-cy='new-blog-url'
+        />
       </Form.Group>
 
       <ButtonToolbar className='form-buttons'>
-        <Button variant="primary" type='submit'>
+        <Button variant="primary" type='submit' data-cy='new-blog-submit'>
           Create
         </Button>
-        <Button variant="danger" onClick={handleResetFields}>
+        <Button variant="danger" onClick={handleResetFields} data-cy='new-blog-reset'>
           Reset
         </Button>
       </ButtonToolbar>
